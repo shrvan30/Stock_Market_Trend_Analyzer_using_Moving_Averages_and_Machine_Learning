@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candlestick Stock Analyzer</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+            transition: margin-left 0.3s;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-size: 16px;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+            transform: translateX(10px);
+        }
+
+        .sidebar-toggle {
+            font-size: 30px;
+            color: #2c3e50;
+            background-color: #ecf0f1;
+            border: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Content Styles */
+        .content {
+            margin-left: 0;
+            padding: 20px;
+            flex-grow: 1;
+            min-height: 100vh;
+            transition: margin-left 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: #fff;
+            padding: 100px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: slideIn 1.2s ease-in-out;
+        }
+
+        .hero button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero button:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+        }
+
+        /* Upload Section */
+        #upload {
+            background-color: #fff;
+            color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #upload h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        #upload .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #upload .form-group label {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        #upload input[type="file"] {
+            padding: 10px;
+            width: 80%;
+            border: 2px dashed #3498db;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        #upload input[type="file"]:hover {
+            border-color: #e74c3c;
+        }
+
+        button[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+       
+
+        /* Patterns Section */
+        .patterns-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .patterns-section h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .pattern {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .pattern:hover {
+            transform: scale(1.02);
+        }
+
+        .pattern img {
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .pattern img:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .pattern p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            animation: zoomIn 0.5s ease-in-out;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 36px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="#" data-target="upload">Upload Chart</a>
+        <a href="#" data-target="patterns">Candlestick Patterns</a>
+        <a href="#" data-target="info">About This App</a>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="toggleBtn">&#9776;</button>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Hero Section -->
+        <div class="hero" style="margin-left:50px ;">
+            <h1>Welcome to Candlestick Stock Analyzer</h1>
+            <p>Unlock the power of candlestick patterns to make informed trading decisions.</p>
+            <button onclick="document.getElementById('upload').scrollIntoView({ behavior: 'smooth' });">Get Started</button>
+        </div>
+
+        <!-- Upload Section -->
+        <div id="upload" class="container" style="margin-left:300px ;" >
+            <h1><i>Candlestick Stock Analyzer</i></h1>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="stockImage"><b>Upload Stock Chart Image</b></label>
+                    <input type="file" id="stockImage" name="stockImage" accept="image/*" required>
+                </div>
+                <button type="submit">Analyze Your Stock Chart</button>
+            </form>
+            <div id="output" class="output" style="display: none;">
+                <h3>Predictions</h3>
+                <p id="predictionResult">Loading predictions...</p>
+            </div>
+        </div>
+
+        <!-- Patterns Section -->
+        <div id="patterns" class="patterns-section" style="margin-top:25px;margin-left:130px; ;">
+            <h2>Candlestick Patterns</h2>
+            <div class="pattern">
+                <img src="https://cdn.litemarkets.com/cache/uploads/blog_post/blog_posts/hammer-candlestick-pattern/hammer-candlestick-pattern.jpg?q=75&w=1000&s=3cb5105beee06b3d3c99802ddc79190b" alt="Hammer Pattern">
+                <p><strong>Hammer:</strong> A hammer is a price pattern in candlestick charting that occurs when a security trades significantly lower than its opening, but rallies within the period to close near the opening price.</p>
+            </div>
+            <div class="pattern">
+                <img src="https://www.adigitalblogger.com/wp-content/uploads/shooting-star.png" alt="Shooting Star Pattern">
+                <p><strong>Shooting Star:</strong> The shooting star pattern emerges on candlestick charts, which visually represent price movements over a specific period.</p>
+            </div>
+            <div class="pattern">
+                <img src="https://www.gettogetherfinance.com/blog/wp-content/uploads/2023/07/bullish-engulfing.jpg" alt="Engulfing Pattern">
+                <p><strong>Engulfing Pattern:</strong> Indicates a strong reversal with larger candles engulfing smaller ones.</p>
+            </div>
+            <div class="pattern">
+                <img src="https://media.licdn.com/dms/image/v2/D5612AQGPDThzuRMFpw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1709709802074?e=2147483647&v=beta&t=bV9HaqAq48zwD0TZmrJ7miw0sUnbV2b35P3UZSYlshA" alt="Doji Pattern">
+                <p><strong>Doji:</strong> Represents market indecision; can signal reversal or continuation.</p>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="info" class="about-section" style=" padding-left: 200px;padding-right: 200px;padding-top: 20px;">
+            <h2>About This App</h2>
+            <p>This web app allows users to upload candlestick charts for analysis. It identifies common patterns and provides insights into potential price movements and trends. The app leverages advanced machine learning algorithms for accurate predictions and market insights.</p>
+        </div>
+
+        <!-- Image Modal -->
+        <div id="imageModal" class="image-modal">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <img id="modalImage" class="modal-content">
+            <div id="caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.querySelector('.sidebar');
+        const links = document.querySelectorAll('.sidebar a');
+        const sections = document.querySelectorAll('.container, .patterns-section');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.style.left = sidebar.style.left === '-250px' ? '0' : '-250px';
+        });
+
+        // Auto-close sidebar and show selected section
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                sidebar.style.left = '-250px'; // Close sidebar
+                sections.forEach(section => section.classList.remove('active'));
+                const target = link.getAttribute('data-target');
+                const targetSection = document.getElementById(target);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Image Modal
+        const images = document.querySelectorAll('.pattern img');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const caption = document.getElementById('caption');
+        const closeBtn = document.getElementById('closeBtn');
+
+        images.forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = 'flex';
+                modalImage.src = this.src;
+                caption.innerHTML = this.alt;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

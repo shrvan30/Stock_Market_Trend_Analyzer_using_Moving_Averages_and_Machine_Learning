@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Analyzer</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Video Background -->
+  <div class="video-background">
+    <video autoplay muted loop id="bgVideo">
+      <source src="background-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav>
+    <div class="menu-icon" id="menuIcon">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" id="analyseStock">ANALYSE STOCK</a></li>
+      <li><a href="#" id="knowMore">WANT TO KNOW MORE?</a></li>
+      <li><a href="#" id="about">ABOUT</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Default Tab: ANALYSE STOCK -->
+    <div id="analyseStockTab" class="tab-content active">
+      <div class="hero-section">
+        <h1>Analyse Your Stocks Like a Pro</h1>
+        <p>Get detailed insights and predictions for your stock investments.</p>
+        <button id="analyseButton">Analyse Your Stocks</button>
+      </div>
+    </div>
+<!-- WANT TO KNOW MORE? Tab -->
+<div id="knowMoreTab" class="tab-content">
+    <div class="content-section">
+      <h1>Learn About Candlestick Patterns</h1>
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for a pattern...">
+        <button id="searchButton">Search <i class="fas fa-search"></i></button>
+      </div>
+      <div class="card-container">
+        <!-- Hammer Pattern Card -->
+        <div class="card" id="hammerCard">
+          <img src="hammer-pattern.jpg" alt="Hammer Pattern">
+          <h3>Hammer</h3>
+          <div class="info" id="hammerInfo">
+            <p>A hammer is a price pattern in candlestick charting that occurs when a security trades significantly lower than its opening, but rallies within the period to close near the opening price.</p>
+          </div>
+        </div>
+  
+        <!-- Shooting Star Pattern Card -->
+        <div class="card" id="shootingStarCard">
+          <img src="shooting-star.png" alt="Shooting Star Pattern">
+          <h3>Shooting Star</h3>
+          <div class="info" id="shootingStarInfo">
+            <p>The shooting star pattern emerges on candlestick charts, which visually represent price movements over a specific period.</p>
+          </div>
+        </div>
+  
+        <!-- Engulfing Pattern Card -->
+        <div class="card" id="engulfingCard">
+          <img src="bullish-engulfing.jpg" alt="Engulfing Pattern">
+          <h3>Engulfing</h3>
+          <div class="info" id="engulfingInfo">
+            <p>Indicates a strong reversal with larger candles engulfing smaller ones.</p>
+          </div>
+        </div>
+  
+        <!-- Doji Pattern Card -->
+        <div class="card" id="dojiCard">
+          <img src="doji.png" alt="Doji Pattern">
+          <h3>Doji</h3>
+          <div class="info" id="dojiInfo">
+            <p>Represents market indecision; can signal reversal or continuation.</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- RSI and Moving Average Sections -->
+      <div class="info-row" id="whatIsMaRow">
+        <h3>What is Moving Average?</h3>
+      </div>
+      <div class="info-row" id="typesOfMaRow">
+        <h3>Types of Moving Average</h3>
+      </div>
+      <div class="info-row" id="whatIsRsiRow">
+        <h3>What is RSI?</h3>
+      </div>
+      <div class="info-row" id="typesOfRsiRow">
+        <h3>Types of RSI</h3>
+      </div>
+  
+      <!-- Info Boxes -->
+      <div class="info-box" id="whatIsMaBox">
+        <h2>What is a Moving Average?</h2>
+        <p>A moving average (MA) smooths out price data to identify trends. It helps traders see the overall market direction without short-term price fluctuations.</p>
+        <p>
+          <strong>Formula for Standard RSI:</strong><br>
+          RSI = 100 − [100 / (1 + RS)]<br>
+          Where:<br>
+          RS (Relative Strength) = Average Gain / Average Loss over the selected period (usually 14).
+        </p>
+        <button class="close-box-button">Close</button>
+      </div>
+  
+      <div class="info-box" id="typesOfMaBox">
+        <h2>Types of Moving Average</h2>
+        <p>
+          <strong>1. Crossover Signals</strong><br>
+          Crossovers occur when a shorter-term moving average crosses above or below a longer-term moving average. These events can be important indicators of changing market sentiment.<br><br>
+          <strong>a) Bullish Crossover (Golden Cross)</strong><br>
+          Signal: This occurs when a shorter-term moving average crosses above a longer-term moving average.<br>
+          Examples:<br>
+          - 100-day moving average crossing above the 200-day moving average<br>
+          - 100-day moving average crossing above the 250-day moving average<br>
+          Interpretation: A bullish crossover is considered a positive signal, often indicating the start of an uptrend.<br>
+          Type: Bullish<br><br>
+          <strong>b) Bearish Crossover (Death Cross)</strong><br>
+          Signal: This happens when a shorter-term moving average crosses below a longer-term moving average.<br>
+          Examples:<br>
+          - 100-day moving average crossing below the 200-day moving average<br>
+          - 100-day moving average crossing below the 250-day moving average<br>
+          Interpretation: A bearish crossover is viewed as a negative signal, often suggesting that a downtrend may be starting.<br>
+          Type: Bearish<br><br>
+          <strong>c) 200-day and 250-day Moving Average Crossover</strong><br>
+          Signal: A crossover between the 200-day and 250-day moving averages is rarer, but it can still indicate a long-term trend shift.<br>
+          Interpretation: If the 200-day moving average crosses above the 250-day moving average, it suggests increasing bullish momentum. Conversely, if the 200-day crosses below the 250-day, it indicates weakening long-term price trends and the possibility of a downtrend.<br>
+          Type: Long-term Trend Shift<br><br>
+          <strong>2. Support and Resistance Signals</strong><br>
+          Moving averages, especially the 200-day and 250-day, often serve as dynamic support and resistance levels.<br><br>
+          <strong>a) Price Bouncing off Moving Averages (Support or Resistance)</strong><br>
+          Signal: If the price is above a moving average and then pulls back to it and bounces higher, this moving average is acting as support. Similarly, if the price is below a moving average and bounces lower after approaching it, the moving average acts as resistance.<br>
+          Interpretation: Moving averages, especially the 200-day and 250-day, often act as long-term support or resistance.<br><br>
+          <strong>b) Price Breaking Through Moving Averages</strong><br>
+          Signal: When the price crosses through a moving average, it is a significant signal. For example, if the price breaks through the 200-day moving average to the downside, it suggests a potential trend reversal or weakening of the current uptrend.<br>
+          Interpretation: A breakout above a moving average is a sign of bullish momentum, while a breakdown below a moving average signals bearish momentum.<br><br>
+          <strong>3. Trend Confirmation Signals</strong><br>
+          The alignment of multiple moving averages can help confirm a trend.<br><br>
+          <strong>a) Bullish Trend Confirmation</strong><br>
+          Signal: If the 100-day moving average is above the 200-day moving average and the 200-day is above the 250-day moving average, this alignment suggests a strong uptrend.<br>
+          Interpretation: This indicates that both short-term and long-term trends are pointing upward, providing strong confirmation that the market is in a bullish phase.<br><br>
+          <strong>b) Bearish Trend Confirmation</strong><br>
+          Signal: If the 100-day moving average is below the 200-day moving average, and the 200-day is below the 250-day moving average, this alignment indicates a strong downtrend.<br>
+          Interpretation: This shows that both short-term and long-term trends are pointing downward, signaling that the market is in a bearish phase.<br><br>
+          <strong>4. Divergence and Convergence Signals</strong><br>
+          Divergence and convergence between price action and moving averages can give insights into potential reversals or continuation of trends.<br><br>
+          <strong>a) Positive Divergence</strong><br>
+          Signal: Positive divergence occurs when the price forms lower lows, but the moving average (such as the 100-day or 200-day) forms higher lows.<br>
+          Interpretation: This suggests that selling pressure is weakening, and a reversal to the upside could be imminent. It’s a potential signal of a bullish reversal.<br><br>
+          <strong>b) Negative Divergence</strong><br>
+          Signal: Negative divergence occurs when the price forms higher highs, but the moving average forms lower highs.<br>
+          Interpretation: This suggests that upward momentum is slowing down, and a price reversal to the downside could be coming. It’s a potential signal of a bearish reversal.<br><br>
+          <strong>5. Moving Average "Flatness" or "Slope"</strong><br>
+          The slope and direction of moving averages give an indication of the trend’s strength.<br><br>
+          <strong>a) Flat Moving Averages</strong><br>
+          Signal: If the moving averages (especially the 100-day, 200-day, or 250-day) become flat, it suggests a lack of trend, which can signal market indecision or consolidation.<br>
+          Interpretation: A flat moving average implies that the market is in a period of range-bound trading and may not have a clear direction.<br><br>
+          <strong>b) Steeply Rising or Falling Moving Averages</strong><br>
+          Signal: If the moving averages are sloping steeply upwards (bullish) or downwards (bearish), this indicates a strong trend.<br>
+          Interpretation: A steep upward slope of a moving average signals strong bullish momentum, while a steep downward slope signals strong bearish momentum.<br><br>
+          <strong>6. Crossovers with Volume</strong><br>
+          Volume can be used to confirm moving average crossovers.<br><br>
+          <strong>a) Volume Increase on Bullish Crossover</strong><br>
+          Signal: If a bullish crossover (e.g., the 100-day crossing above the 200-day) occurs alongside a significant increase in volume, it indicates strong market conviction behind the uptrend.<br>
+          Interpretation: High volume confirms that the crossover is supported by strong market participation, making it a more reliable signal.<br><br>
+          <strong>b) Volume Increase on Bearish Crossover</strong><br>
+          Signal: A bearish crossover (e.g., the 100-day crossing below the 200-day) with high volume indicates strong conviction behind the downtrend.<br>
+          Interpretation: The increased volume confirms that the market is likely to continue its downward movement.
+        </p>
+        <button class="close-box-button">Close</button>
+      </div>
+  
+      <div class="info-box" id="whatIsRsiBox">
+        <h2>What is RSI?</h2>
+        <p>The Relative Strength Index (RSI) is a momentum oscillator that measures the speed and change of price movements. It helps traders identify overbought (above 70) and oversold (below 30) conditions.</p>
+        <button class="close-box-button">Close</button>
+      </div>
+  
+      <div class="info-box" id="typesOfRsiBox">
+        <h2>Types of RSI</h2>
+        <p>
+          <strong>1) Standard RSI (14-period)</strong><br>
+          Most commonly used RSI with a 14-period calculation. Good for identifying general trends but may lag in fast-moving markets.<br><br>
+          <strong>2) Stochastic RSI (StochRSI)</strong><br>
+          Applies the stochastic oscillator formula to RSI values instead of price data. More sensitive to price changes, making it useful for short-term traders.<br>
+          Formula: StochRSI = [RSI − Lowest(RSI, n)] / [Highest(RSI, n) − Lowest(RSI, n)]. Ranges between 0 and 1 instead of 0-100.<br><br>
+          <strong>3) Connors RSI (CRSI)</strong><br>
+          A combination of 3 indicators: Standard RSI (short-term, like 3-period RSI), Streak Length (counts consecutive up/down closes), and Percentage Rank (compares today's price change with previous changes). Helps detect short-term reversals more effectively.<br><br>
+          <strong>4) Cutler’s RSI</strong><br>
+          Similar to standard RSI but uses Simple Moving Average (SMA) instead of Exponential Moving Average (EMA). Results in slightly different values, but overall, it behaves similarly.<br><br>
+          <strong>5) Dynamic RSI</strong><br>
+          The RSI period adjusts automatically based on market volatility. When the market is volatile, RSI uses a shorter period for quick reactions. When the market is calm, it uses a longer period to reduce noise.
+        </p>
+        <button class="close-box-button">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="aboutTab" class="tab-content">
+    <div class="content-section">
+      <h1>About Us</h1>
+      <p>
+        Welcome to <strong> Stock Analyzer</strong>, a project developed as part of our <strong>Project-Based Learning (PBL)</strong> initiative. This platform is designed to help traders and investors understand and analyze stock market trends using candlestick patterns, technical indicators like RSI (Relative Strength Index), and moving averages.
+      </p>
+      <h2>Our Mission</h2>
+      <p>
+        Our mission is to simplify stock market analysis for both beginners and experienced traders. By providing clear explanations, interactive tools, and real-time insights, we aim to empower users to make informed trading decisions.
+      </p>
+      <h2>What We Offer</h2>
+      <ul>
+        
+        <li><strong>RSI (Relative Strength Index)</strong>: Understand momentum and identify overbought or oversold conditions.</li>
+        <li><strong>Moving Averages</strong>: Explore trend analysis using crossovers, support/resistance, and divergence signals.</li>
+        <li><strong>Candlestick Pattern Analysis</strong>: Learn about key patterns like Hammer, Shooting Star, Engulfing, and Doji.</li>
+        <li><strong>Interactive Tools</strong>: Analyze your stocks with easy-to-use tools and visualizations.</li>
+      </ul>
+      
+      <h2>Technologies Used</h2>
+      <p>
+        This project was built using modern web technologies, including:
+      </p>
+      <ul>
+        <li><strong>HTML, CSS, JavaScript</strong>: For the frontend design and interactivity.</li>
+        <li><strong>Charting Libraries</strong>: To visualize stock data and patterns.</li>
+        <li><strong>Backend</strong>:Languages used:Python, TensorFlow, Scikit-learn, Streamlit</li>
+        <li><strong>Libraries Used</strong>:Pandas, NumPy, Matplotlib, Plotly, Seaborn, Yahoo Finance API</li>
+        <li><strong>VS Code</strong>: Our go-to code editor for development.</li>
+      </ul>
+      <h2>Contact Us</h2>
+      <p>
+        Have questions or feedback? We'd love to hear from you! Reach out to us at <a href="mailto:support@stockanalyzer.com">support@stockanalyzer.com</a>.
+      </p>
+    </div>
+  </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
